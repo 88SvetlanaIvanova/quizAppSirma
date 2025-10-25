@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+</head>
+<body>
+    <form action="/submit" method="post">
+        <div th:each="q, iStat : ${questions}">
+            <p>Question <span th:text="${iStat.index + 1}"></span> of
+                <span th:text="${questions != null ? #lists.size(questions) : 0}"></span></p>
+            <p th:text="${q.text}"></p>
+            <div th:each="opt,optStat :${q.options}">
+                <label>
+                <input type="radio"
+                       th:name="${'answers[' + iStat.index + ']'}"
+                       th:value="${optStat.index}" required/>
+                   <span th:text="${opt}"></span>
+                </label>
+            </div>
+            <input type="hidden" th:name="${'answers[' + iStat.index + ']'}" value="-1" />
+        </div>
+        <button type="submit">Sumbit</button>
+    </form>
+</body>
+</html>

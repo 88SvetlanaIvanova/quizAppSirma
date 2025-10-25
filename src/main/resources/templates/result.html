@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+    <h2>Your Score: <span th:text="${score}"></span> / <span th:text="${#lists.size(questions)}"></span></h2>
+    <div th:each="q, iStat : ${questions}">
+        <p>
+            <strong th:text="${q.text}"></strong><br/>
+            Your answer:
+            <span th:if="${answers[iStat.index] != -1}" th:text="${q.options[answers[iStat.index]]}"></span>
+            <span th:if="${answers[iStat.index] == -1}">No answer</span><br/>
+
+            <span th:if="${quizResults != null and !(quizResults[iStat.index])}">
+            Correct answer: <span th:text="${q.options[q.correctIndex]}"></span><br/>
+            <span style="color:red;">Incorrect</span>
+            </span>
+            <span th:if="${quizResults != null}" th:with="isCorrect=${quizResults[iStat.index]}">
+             <span th:if="${isCorrect}" style="color:green;">Correct</span>
+            </span>
+        </p>
+    </div>
+
+    <h3 th:if="${score == questions.size()}">🎉 Great job!</h3>
+    <h3 th:if="${score >= questions.size() / 2 && score < questions.size()}">👍 Good effort!</h3>
+    <h3 th:if="${score < questions.size() / 2}">😅 Try again!</h3>
+
+    <a href="/quiz">Retake</a>
+</body>
+</html>

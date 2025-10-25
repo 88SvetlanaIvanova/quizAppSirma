@@ -1,0 +1,27 @@
+[
+  {
+    "text": "Which annotation is used to define a controller in Spring MVC?",
+    "options": ["@Component", "@Controller", "@RestService", "@MVCController"],
+    "correctIndex": 1
+  },
+  {
+    "text": "Which method in a controller returns a View in ASP.NET Core MVC?",
+    "options": ["Display()", "Show()", "View()", "Render()"],
+    "correctIndex": 2
+  },
+  {
+    "text": "Which method is used to define a GET route in Express?",
+    "options": ["app.route()", "app.get()", "express.get()", "router.create()"],
+    "correctIndex": 1
+  },
+  {
+    "text": "In MVC architecture, what does the 'C' stand for?",
+    "options": ["Code", "Controller", "Class", "Content"],
+    "correctIndex": 1
+  },
+  {
+    "text": "Which part of MVC is responsible for handling user input?",
+    "options": ["Model", "View", "Controller", "Template"],
+    "correctIndex": 2
+  }
+]
