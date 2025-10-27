@@ -1,0 +1,72 @@
+[
+  {
+    "text": "What does MVC stand for?",
+    "options": ["Model View Controller", "Main View Control", "Module Version Code", "Manage View Context"],
+    "correctIndex": 0
+  },
+  {
+    "text": "Which annotation defines a Spring controller?",
+    "options": ["@Service", "@Component", "@Controller", "@RestController"],
+    "correctIndex": 2
+  },
+  {
+    "text": "What does MVC stand for?",
+    "options": ["Model View Controller", "Main View Control", "Module Version Code", "Manage View Context"],
+    "correctIndex": 0
+  },
+  {
+    "text": "Which annotation defines a Spring controller?",
+    "options": ["@Service", "@Component", "@Controller", "@RestController"],
+    "correctIndex": 2
+  },
+  {
+    "text": "Which keyword is used to inherit a class in Java?",
+    "options": ["implements", "extends", "inherits", "super"],
+    "correctIndex": 1
+  },
+  {
+    "text": "Which of the following is not a Java primitive type?",
+    "options": ["int", "String", "boolean", "double"],
+    "correctIndex": 1
+  },
+  {
+    "text": "Which method is the entry point for a Java application?",
+    "options": ["run()", "execute()", "start()", "main()"],
+    "correctIndex": 3
+  },
+  {
+    "text": "Which collection class does not allow duplicate elements?",
+    "options": ["List", "Set", "Map", "Queue"],
+    "correctIndex": 1
+  },
+  {
+    "text": "What is the purpose of the 'this' keyword in Java?",
+    "options": ["It refers to the current object", "It refers to the parent class", "It creates a new object", "It imports the current package"],
+    "correctIndex": 0
+  },
+  {
+    "text": "In Spring, which annotation is used to inject dependencies automatically?",
+    "options": ["@Autowired", "@Qualifier", "@Inject", "@Resource"],
+    "correctIndex": 0
+  },
+  {
+    "text": "Which statement is true about the 'final' keyword in Java?",
+    "options": ["It marks a variable as immutable", "It allows method overriding", "It means the method is abstract", "It defines a constant loop"],
+    "correctIndex": 0
+  },
+  {
+    "text": "What does the '@RequestMapping' annotation do in Spring MVC?",
+    "options": ["Maps web requests to specific handler methods", "Defines a database connection", "Registers a Spring Bean", "Sets application properties"],
+    "correctIndex": 0
+  },
+  {
+    "text": "Which Java feature allows a subclass to provide a specific implementation of a method already defined in its superclass?",
+    "options": ["Overloading", "Overriding", "Encapsulation", "Polymorphism"],
+    "correctIndex": 1
+  },
+  {
+    "text": "What is the default scope of a Spring Bean?",
+    "options": ["prototype", "singleton", "session", "request"],
+    "correctIndex": 1
+  }
+]

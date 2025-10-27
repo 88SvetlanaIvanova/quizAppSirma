@@ -1,48 +1,89 @@
 package com.sirma.quizz.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sirma.quizz.model.QuizInfo;
 import com.sirma.quizz.model.Question;
-import jakarta.annotation.PostConstruct;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class QuizService {
-    private List<Question> questions;
 
-    @PostConstruct
-    public void init() {
-        questions = loadQuestionsFromFile();
-        Collections.shuffle(questions);
+    private final List<QuizLoader> loaders;
+    private static final int MAX_QUESTIONS_PER_QUIZ = 5;
+
+    public QuizService(List<QuizLoader> loaders) {
+        this.loaders = loaders;
     }
 
-    private List<Question> loadQuestionsFromFile() {
-        ObjectMapper mapper = new ObjectMapper();
-        try (InputStream is = getClass().getResourceAsStream("/questions.json")) {
-            return mapper.readValue(is, new TypeReference<List<Question>>() {});
+    public List<Question> getQuiz(String topic) {
+
+        if (topic == null || topic.isBlank()) return Collections.emptyList();
+        topic = topic.trim();
+
+        List<String> candidates = new ArrayList<>();
+        if (topic.endsWith(".json") || topic.endsWith(".csv")) {
+            candidates.add(topic);
+        } else {
+            candidates.add(topic + ".json");
+            candidates.add(topic + ".csv");
+        }
+
+        List<Question> loaded = Collections.emptyList();
+        for (String fileName : candidates) {
+            if (fileName == null) continue;
+            for (QuizLoader loader : loaders) {
+                try {
+                    if (loader.isSupported(fileName)) {
+                        var result = loader.load(fileName);
+                        if (result != null && !result.isEmpty()) {
+                            loaded = result;
+                            break;
+                        }
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            if (!loaded.isEmpty()) break;
+        }
+
+        if (loaded.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        Collections.shuffle(loaded);
+
+        for (Question q : loaded) {
+            if (q.getOptions() != null) {
+                q.shuffleOptions();
+            }
+        }
+
+        int limit = Math.min(MAX_QUESTIONS_PER_QUIZ, loaded.size());
+        return new ArrayList<>(loaded.subList(0, limit));
+    }
+
+    public List<QuizInfo> getAvailableQuizzes() {
+        List<QuizInfo> quizInfos = new ArrayList<>();
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+
+        try {
+            Resource[] resources =resolver.getResources("classpath*:quizzes/*.{json,csv}");
+            for (Resource resource : resources) {
+                String filename = resource.getFilename();
+                if (filename != null) {
+                    quizInfos.add(new QuizInfo(filename.toLowerCase(Locale.ROOT).trim()));
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
-            return new ArrayList<>();
         }
+        quizInfos.sort(Comparator.comparing(QuizInfo::getDisplayName));
+        return quizInfos;
     }
 
-    public List<Question> getQuiz() {
-        return questions.subList(0, 5);
-    }
-
-//    public int evaluate(List<Integer> userAnswers) {
-//        int score = 0;
-//        for (int i = 0; i < userAnswers.size() ; i++) {
-//            if (questions.get(i).getCorrectIndex() == userAnswers.get(i)) {
-//                score++;
-//            }
-//        }
-//        return score;
-//    }
 }
