@@ -1,8 +1,5 @@
-package com.sirma.quizz.model;
-
+package com.sirma.quiz.model;
 import lombok.Getter;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-
 import java.io.IOException;
 
 @Getter
@@ -30,11 +27,4 @@ public class QuizInfo {
         return Character.toUpperCase(base.charAt(0)) + base.substring(1);
     }
 
-    public String getFileName() {
-        return fileName;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
 }

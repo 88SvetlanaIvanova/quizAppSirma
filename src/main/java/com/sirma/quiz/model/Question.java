@@ -1,4 +1,4 @@
-package com.sirma.quizz.model;
+package com.sirma.quiz.model;
 
 import lombok.*;
 

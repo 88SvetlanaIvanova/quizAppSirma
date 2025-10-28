@@ -1,5 +1,5 @@
-package com.sirma.quizz.service;
-import com.sirma.quizz.model.Question;
+package com.sirma.quiz.service;
+import com.sirma.quiz.model.Question;
 import java.util.List;
 public interface QuizLoader {
     boolean isSupported(String fileName);

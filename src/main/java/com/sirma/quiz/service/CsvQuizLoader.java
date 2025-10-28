@@ -1,5 +1,7 @@
-package com.sirma.quizz.service;
-import com.sirma.quizz.model.Question;
+package com.sirma.quiz.service;
+import com.sirma.quiz.model.Question;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -13,6 +15,9 @@ import java.util.Locale;
 
 @Component
 public class CsvQuizLoader implements QuizLoader{
+
+    private static final Logger log = LoggerFactory.getLogger(CsvQuizLoader.class);
+
     @Override
     public boolean isSupported(String fileName) {
         return fileName != null && fileName.toLowerCase(Locale.ROOT).endsWith(".csv");
@@ -59,7 +64,7 @@ public class CsvQuizLoader implements QuizLoader{
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Failed to load quiz file: {}", fileName, e);
             return Collections.emptyList();
         }
         return questions.size() > 5 ? questions.subList(0, 5) : questions;

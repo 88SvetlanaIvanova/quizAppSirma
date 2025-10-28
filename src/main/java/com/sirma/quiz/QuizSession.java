@@ -1,16 +1,23 @@
-package com.sirma.quizz;
-import com.sirma.quizz.model.Question;
+package com.sirma.quiz;
+import com.sirma.quiz.model.Question;
+import lombok.Getter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
 @Component
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = org.springframework.context.annotation.ScopedProxyMode.TARGET_CLASS)
 public class QuizSession implements Serializable {
+
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private List<Question> quiz;
@@ -28,10 +35,6 @@ public class QuizSession implements Serializable {
         }
     }
 
-    public List<Question> getQuiz() { return quiz; }
-    public List<Integer> getAnswers() { return answers; }
-    public String getTopic() { return topic; }
-
     public void setAnswer(int index, int answer) {
         if (answers != null && index >= 0 && index < answers.size()) {
             answers.set(index, answer);
@@ -46,5 +49,13 @@ public class QuizSession implements Serializable {
 
     public boolean isValid() {
         return quiz != null && answers != null && Objects.equals(quiz.size(), answers.size());
+    }
+
+    public void finalizeResults() {
+        for (int i = 0; i < answers.size(); i++) {
+            if (answers.get(i) == null) {
+                answers.set(i, -1);
+            }
+        }
     }
 }

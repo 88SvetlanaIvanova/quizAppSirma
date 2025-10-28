@@ -1,7 +1,9 @@
-package com.sirma.quizz.service;
+package com.sirma.quiz.service;
 
-import com.sirma.quizz.model.QuizInfo;
-import com.sirma.quizz.model.Question;
+import com.sirma.quiz.model.QuizInfo;
+import com.sirma.quiz.model.Question;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import java.util.*;
 @Service
 public class QuizService {
 
+    private static final Logger log = LoggerFactory.getLogger(QuizService.class);
     private final List<QuizLoader> loaders;
     private static final int MAX_QUESTIONS_PER_QUIZ = 5;
 
@@ -45,7 +48,7 @@ public class QuizService {
                         }
                     }
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    log.error("Failed to load quiz: {}", fileName ,ex);
                 }
             }
             if (!loaded.isEmpty()) break;
@@ -80,7 +83,7 @@ public class QuizService {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Failed to load available quizzes.", e);
         }
         quizInfos.sort(Comparator.comparing(QuizInfo::getDisplayName));
         return quizInfos;

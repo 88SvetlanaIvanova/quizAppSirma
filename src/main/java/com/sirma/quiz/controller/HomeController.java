@@ -1,4 +1,4 @@
-package com.sirma.quizz.controller;
+package com.sirma.quiz.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

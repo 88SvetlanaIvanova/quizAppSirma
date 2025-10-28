@@ -1,9 +1,10 @@
-package com.sirma.quizz.service;
+package com.sirma.quiz.service;
 
-import com.sirma.quizz.model.Question;
+import com.sirma.quiz.model.Question;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sirma.quizz.model.Question;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,8 @@ import java.util.List;
 
 @Component
 public class JsonQuizLoader implements QuizLoader{
+
+    private static final Logger log = LoggerFactory.getLogger(JsonQuizLoader.class);
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
@@ -28,7 +31,7 @@ public class JsonQuizLoader implements QuizLoader{
 
             return mapper.readValue(resource.getInputStream(), new TypeReference<>() {});
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Failed to load quiz file: {}", fileName, e);
             return Collections.emptyList();
         }
     }
