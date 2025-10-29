@@ -158,6 +158,7 @@ In the browser:
 http://localhost:8080
 
 Key Endpoints
+
 /	-                      Home page
 
 /quizzes -      	       List available quizzes
