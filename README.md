@@ -159,9 +159,14 @@ http://localhost:8080
 
 Key Endpoints
 /	-                      Home page
+
 /quizzes -      	       List available quizzes
+
 /quiz/{topic}/{index} -  View question at index
-/submit	Submit current - quiz
+
+/submit -	               Submit current quiz
+
 /result -	               Display results
+
 /quiz/load/{topic} -	   (AJAX) Returns quiz data as JSON
 
