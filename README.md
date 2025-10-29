@@ -19,37 +19,6 @@ Quizzes are dynamically loaded from .json or .csv files located in the resources
 
 🎨 Styled using Bootstrap 5.
 
-🏗️ Project Structure
-src/main/java/com/sirma/quizz/
-│
-├── controller/
-│   └── QuizController.java         # Handles routing, quiz navigation, and results
-│
-├── model/
-│   ├── Question.java               # POJO representing a single question
-│   └── QuizInfo.java               # Metadata about available quizzes
-│
-├── service/
-│   ├── QuizService.java            # Detects and loads quizzes dynamically
-│   ├── QuizLoader.java             # Common loader interface
-│   ├── JsonQuizLoader.java         # Loads questions from JSON
-│   └── CsvQuizLoader.java          # Loads questions from CSV
-│
-├── QuizSession.java                # Manages current user's quiz state in session
-└── ...
-
-Templates (src/main/resources/templates)
-Template	Purpose
-home.html	Landing page (welcome + browse link)
-quizzes.html	List of available quizzes
-question.html	Single question view with navigation and timer
-result.html	Results page (score, progress bar, etc.)
-Static assets
-
-Bootstrap is loaded via CDN — no local dependencies required.
-
-Custom CSS (optional): src/main/resources/static/css/style.css.
-
 🧩 How It Works
 🧠 1. Quiz Discovery
 
