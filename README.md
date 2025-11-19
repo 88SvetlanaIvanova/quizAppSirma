@@ -1,26 +1,26 @@
 A simple yet powerful Quiz Web Application built with Spring Boot + Thymeleaf + Bootstrap — no database required.
 Quizzes are dynamically loaded from .json or .csv files located in the resources/quizzes/ folder.
 
-🚀 Features
+ Features
 
-📚 Load quizzes dynamically from .json and .csv files.
+ Load quizzes dynamically from .json and .csv files.
 
-⏱️ Countdown timer (10 minutes total).
+ Countdown timer (10 minutes total).
 
-⏮️ Navigate between questions (Previous / Next).
+ Navigate between questions (Previous / Next).
 
-✅ Automatic quiz submission when time runs out.
+ Automatic quiz submission when time runs out.
 
-📊 Results page with score, progress bar, and color-coded answers.
+ Results page with score, progress bar, and color-coded answers.
 
-🔁 Retake quiz or return to quiz list.
+ Retake quiz or return to quiz list.
 
-💾 No database required — all quizzes live in resource files.
+ No database required — all quizzes live in resource files.
 
-🎨 Styled using Bootstrap 5.
+ Styled using Bootstrap 5.
 
-🧩 How It Works
-🧠 1. Quiz Discovery
+ How It Works
+ 1. Quiz Discovery
 
 At startup or when you visit /quizzes,
 the app scans the classpath folder:
@@ -35,7 +35,7 @@ Each detected file becomes a “quiz topic” in the quiz list.
 Example:
 computer_science.csv → displayed as “Computer science”
 
-🧮 2. Quiz Loading
+ 2. Quiz Loading
 
 Depending on the file extension, the appropriate loader is used:
 
@@ -45,7 +45,7 @@ CsvQuizLoader	.csv	Parses using Apache Commons CSV
 
 Both loaders produce a List<Question>.
 
-🧑‍🏫 3. Quiz Session
+ 3. Quiz Session
 
 When you start a quiz (/quiz/{topic}/0):
 
@@ -63,7 +63,7 @@ start time and duration (for timer)
 
 All of this is kept in your HTTP session (no DB required).
 
-🧭 4. Navigation
+ 4. Navigation
 
 Each question page shows:
 
@@ -75,7 +75,7 @@ The current question text and 4 options.
 
 Remaining time (countdown).
 
-🕒 5. Timer
+ 5. Timer
 
 The timer is handled in the frontend (JavaScript) and backed by session attributes:
 
@@ -91,7 +91,7 @@ The controller detects no action and redirects to /submit?timeout=true.
 
 The quiz is graded automatically.
 
-🧾 6. Results
+ 6. Results
 
 The results page shows:
 
@@ -101,9 +101,9 @@ A green progress bar indicating performance.
 
 Each question, with:
 
-✅ Green background for correct answer.
+ Green background for correct answer.
 
-❌ Red background for user’s wrong answer.
+ Red background for user’s wrong answer.
 
 “Retake Quiz” and “Back to Quizzes” buttons.
 
